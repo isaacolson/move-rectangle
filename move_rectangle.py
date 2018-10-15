@@ -11,22 +11,25 @@ pos_z = get_config_value('Move Rectangle', 'start_z')
 rectLength = get_config_value('Move Rectangle', 'length')
 rectWidth = get_config_value('Move Rectangle', 'width')
 
-device.log('Moving to ' + str(pos_x) + ', ' + str(pos_y) + ', ' + str(pos_z), 'success', ['toast'])
+def moveAbs(x, y, z):
+    device.log('Moving to ' + str(x) + ', ' + str(y) + ', ' + str(z), 'success', ['toast'])
+    device.move_absolute(
+        {
+            'kind': 'coordinate',
+            'args': {'x': x, 'y': y, 'z': z}
+        },
+        100,
+        {
+            'kind': 'coordinate',
+            'args': {'x': 0, 'y': 0, 'z': 0}
+        }
+    )
 
-def moveAbs(x, y, z, length, width):
-
-
-device.move_absolute(
-    {
-        'kind': 'coordinate',
-        'args': {'x': pos_x, 'y': pos_y, 'z': pos_z}
-    }, 
-    100,    
-    {
-        'kind': 'coordinate',
-        'args': {'x': 0, 'y': 0, 'z': 0}
-    }
-)
+moveAbs(pos_x, pos_y, pos_z)
+moveAbs(pos_x, pos_y + rectWidth, pos_z)
+moveAbs(pos_x + rectLength, pos_y + rectWidth, pos_z)
+moveAbs(pos_x + rectLength, pos_y, pos_z)
+moveAbs(pos_x, pos_y, pos_z)
 
 device.log('success!!', 'success', ['toast'])
 
