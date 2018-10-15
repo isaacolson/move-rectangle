@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Move To Safe Farmware"""
+"""Move Rectangle Farmware"""
 
 from farmware_tools import device
 from farmware_tools import get_config_value
